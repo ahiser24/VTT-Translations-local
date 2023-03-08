@@ -8,8 +8,7 @@ from googletrans import Translator
 
 # confirm file path or make relative to current working directory
 #Open vtt file
-filename = input("Enter filename: ")
-captions = webvtt.read(filename)
+captions = webvtt.read('C:\\Users\\andre\\Downloads\\captions.vtt')
 
 translator = Translator()
 translated_captions = []
