@@ -1,25 +1,23 @@
-# check if webvtt is installed
-try:
-    import webvtt
-except ModuleNotFoundError:
-    print("Please install the 'webvtt' library.")
+def translate_captions(source_lang, dest_lang):
+    try:
+        import webvtt
+    except ModuleNotFoundError:
+        print("Please install the 'webvtt' library.")
+    from googletrans import Translator
 
-from googletrans import Translator
+    captions = webvtt.read('C:\\Users\\andre\Downloads\\captions.vtt')
+    translator = Translator()
+    translated_captions = []
 
-# confirm file path or make relative to current working directory
-#Open vtt file
-captions = webvtt.read('C:\\Users\\andre\\Downloads\\captions.vtt')
+    for caption in captions:
+        translated_text = translator.translate(caption.text, src=source_lang, dest=dest_lang).text
+        translated_captions.append(translated_text)
+        caption.text = translated_text
 
-translator = Translator()
-translated_captions = []
+    captions.save(f'C:\\Users\\andre\\Downloads\\translated_captions_{dest_lang}.vtt')
 
-for caption in captions:
-    print(caption.text)
-    translated_text = translator.translate(caption.text, dest='fr').text
-    translated_captions.append(translated_text)
+    return translated_captions
 
-    # Replace the original text with the translated text
-    caption.text = translated_text
-
-# Save the new VTT file with translated captions
-captions.save('C:\\Users\\andre\\Downloads\\translated_captions.vtt')
+translated_captions_cn = translate_captions('en', 'zh-CN')
+translated_captions_es = translate_captions('en', 'es')
+translated_captions_es = translate_captions('en', 'pt')
