@@ -2,6 +2,7 @@
 <li><strong>VTT-Translations</strong><br />
 <ul>
 <li>Translate captions for Microsoft Stream.</li>
+<li>Uses the free google translate</li>
 </ul>
 </li>
 </ul>
